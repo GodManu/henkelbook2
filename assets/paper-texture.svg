@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="480" viewBox="0 0 480 480">
+  <filter id="rough">
+    <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" seed="7" result="n"/>
+    <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.55  0 0 0 0 0.46  0 0 0 0 0.32  0 0 0 0.05 0"/>
+  </filter>
+  <filter id="fiber">
+    <feTurbulence type="turbulence" baseFrequency="0.012 0.18" numOctaves="2" seed="14" result="f"/>
+    <feColorMatrix in="f" type="matrix" values="0 0 0 0 0.45  0 0 0 0 0.37  0 0 0 0 0.25  0 0 0 0.04 0"/>
+  </filter>
+  <rect width="480" height="480" fill="#ece2cd"/>
+  <rect width="480" height="480" filter="url(#rough)"/>
+  <rect width="480" height="480" filter="url(#fiber)"/>
+</svg>
