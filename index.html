@@ -543,34 +543,46 @@ document.querySelectorAll('.toggle button').forEach(b=>{
 });
 
 /* ---------------- countdown ---------------- */
-// July 1, 2025, 00:00 local-ish — target the upcoming July 1
-(function(){
+// August 1, 2026, 00:00 local time
+(function () {
   const now = new Date();
-  // target July 1 of current year; if already passed, next year
-  let year = now.getFullYear();
-  let target = new Date(year, 6, 1, 0, 0, 0); // month 6 = July
-  if(now > target){ /* keep showing released state */ }
-  const $d=document.getElementById('cd-d'),$h=document.getElementById('cd-h'),
-        $m=document.getElementById('cd-m'),$s=document.getElementById('cd-s'),
-        box=document.getElementById('countdown');
 
-  function pad(n){return String(n).padStart(2,'0')}
-  function render(){
+  // Target August 1 of the current year
+  const year = now.getFullYear();
+  const target = new Date(year, 7, 1, 0, 0, 0); // month 7 = August
+
+  const $d = document.getElementById('cd-d'),
+        $h = document.getElementById('cd-h'),
+        $m = document.getElementById('cd-m'),
+        $s = document.getElementById('cd-s'),
+        box = document.getElementById('countdown');
+
+  function pad(n) {
+    return String(n).padStart(2, '0');
+  }
+
+  function render() {
     const lang = document.documentElement.lang || 'es';
     const diff = target - new Date();
-    if(diff <= 0){
-      box.innerHTML = '<div class="cd-live">'+ (I18N[lang]['released']) +'</div>';
+
+    if (diff <= 0) {
+      box.innerHTML =
+        '<div class="cd-live">' + I18N[lang]['released'] + '</div>';
       return;
     }
-    const s = Math.floor(diff/1000);
-    $d.textContent = pad(Math.floor(s/86400));
-    $h.textContent = pad(Math.floor(s%86400/3600));
-    $m.textContent = pad(Math.floor(s%3600/60));
-    $s.textContent = pad(s%60);
+
+    const seconds = Math.floor(diff / 1000);
+
+    $d.textContent = pad(Math.floor(seconds / 86400));
+    $h.textContent = pad(Math.floor((seconds % 86400) / 3600));
+    $m.textContent = pad(Math.floor((seconds % 3600) / 60));
+    $s.textContent = pad(seconds % 60);
   }
+
   window.__renderCD = render;
+
   render();
-  setInterval(render,1000);
+  setInterval(render, 1000);
 })();
 
 /* ---------------- reveal on scroll ---------------- */
